@@ -1,0 +1,41 @@
+@{
+    ViewBag.Title = "Create New Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Book</h2>
+
+<div class="row">
+    <form action="" method="post">
+        <div class="form-group">
+            <label>Book Name</label>
+            <input type="text" class="form-control" placeholder="Name" name="Name">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            @Html.DropDownList("CategoryId",
+                            ViewBag.Categories as SelectList,
+                            new { @class = "form-control" })
+            @*<select name="CategoryId" class="form-control">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>*@
+        </div>
+        <div class="form-group">
+            <label>Writer</label>
+            @Html.DropDownList("WriterIds",
+                            ViewBag.Writers as SelectList,
+                            new { multiple = "true", @class = "form-control" })
+            @*<select multiple name="WriterIds" class="form-control">
+                @foreach (var writer in Model.Writers)
+                {
+                    <option value="@writer.Id">@writer.Name</option>
+                }
+            </select>*@
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+

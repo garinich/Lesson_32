@@ -1,0 +1,40 @@
+﻿@model IList<BusinessLayer.ModelsDTO.BookDTO>
+@{
+    ViewBag.Title = "All Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Books</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Book Name</th>
+        <th>Category</th>
+        <th>Writers</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Id</td>
+            <td><a href="/BookStore/Details/@book.Id">@book.Name</a></td>
+            <td><a href="/BookStore/CategoryDetails/@book.Category.Id">@book.Category.Name</a></td>
+            <td>
+                <ul>
+                    @foreach (var writer in book.Writers)
+                    {
+                        <li><a href="/BookStore/WriterDetails/@writer.Id">@writer.Name</a></li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a class="btn btn-success" href="/BookStore/EditBook/@book.Id">Edit</a>
+                <a class="btn btn-danger" href="/BookStore/Delete/@book.Id">Delete</a>
+                @*@Html.ActionLink("Remove", "Delete", new {id = book.Id})*@
+            </td>
+        </tr>
+    }
+</table>
+<br>
+<a class="btn btn-primary" href="/BookStore/CreateBook/" role="button">Add New Book</a>
